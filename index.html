@@ -1,0 +1,74 @@
+
+
+<html>
+  <head>
+    <title>My Webpage</title> 
+  </head>
+  <body>
+    
+    <h1> Battle Ship </h1>
+      <p>
+        <table>
+        <tbody>
+            {% for row in board1 %}
+              <tr> {% for element in row %}
+                <td> {{ element }} </td>
+              {% endfor %}              
+              </tr>
+              {% endfor %}
+        </tbody>
+      </table>
+      <table>
+        <br>
+        <br>
+        <tbody>
+            {% for row in board2 %}
+              <tr> {% for element in row %}
+                <td> {{ element }} </td>
+              {% endfor %}              
+              </tr>
+              {% endfor %}
+        </tbody>
+      </table>
+      </p>
+
+      <p>
+        <h2> Enemy Ships </h2>
+        <ul>
+        {% for ship in enemyships %}
+          {% if ship.is_sunk() %}
+            <li>{{ ship.name }} is sunk </li>
+          {% else %}
+            <li>{{ ship.name }} is afloat </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+        <h2> My Ships </h2>
+        <ul>
+          {% for ship in myships %}
+            {% if ship.is_sunk() %}
+             <li>{{ ship.name }} is sunk </li>
+            {% else %}
+              <li>{{ ship.name }} is afloat </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </p>
+
+      <form action="/Move" method="post">
+                <div> 
+                  <select name="who">
+                    <option value="me">Me</option>
+                    <option value="them">Them</option>
+                  </select>
+                  Col: <input type="number" name="col" min="0" max="9">
+                  Row: <input type="text" name="row" pattern="[A-Ja-j]{1}" size='1'>
+  
+                  <input type="submit" value="Move">
+                </div>
+      </form>
+      <form action="/Reset" method="post">
+        <input type="submit" value="Reset Game">
+      </form>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> MP2 CS498</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/mcustom.js"> </script>
+ </head>
+  <body>
+    
+    <h1> Game Lobby </h1>
+
+      <p>
+        <ul>
+        {% for game in games %}
+            <li> 
+              <a href="/game/{{game.key.id()}}/playerConnect"> Table Name: {{game.name}} </a>
+            </li> 
+        {% else %}
+            <li>No Games</li>
+        {% endfor %}
+        </ul>
+
+
+        <form id="new_game" method="POST">
+          <div>
+            <label> Game Name: </label>
+            <input type="text" name="game_name" value='' id="game_name">
+            <input type="submit"  value="Create and Join Game">
+          </div>
+        </form>  
+
+      </p>
+
+
+
+  </body>
+</html>

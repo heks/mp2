@@ -1,0 +1,55 @@
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> MP2 CS498</title>
+    <script src='/_ah/channel/jsapi'></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript" src="/js/mcustom.js"> </script>
+ </head>
+  <body>
+    
+    <h1> {{ game.name }} </h1>
+    <h4> Current players: {{game.players_current}} </h4>
+
+    <ul>
+        {% for player in game.players %}
+            <li> 
+              Name : {{ player.name }}
+              Tokens : {{ player.tokens }}
+              ID : {{ player.player_id }}
+            </li>
+        {% else %}
+            <li>No Players playing</li>
+        {% endfor %}
+    </ul>
+
+    <li> Dealers Cards : {{ game.common_cards_visible }} </li>
+
+
+    <p>Your ID is : {{curr_player.player_id}}
+       Your Cards are : {{curr_player.cards_visible}}
+       Your Tokens : {{curr_player.tokens}}</p>
+    <p>Game deck : {{game.deck}} </p>
+
+      {% if game.current_turn == curr_player.player_id %}
+      <p>
+        <form action="/game/{{game.key.id()}}/action" id="do_action" method="POST" accept-charset="utf-8">
+          <select name="Action">
+            <option id="play" selected="selected" value="Play">Play</option>
+            <option id="draw" value="Draw">Draw</option>
+            <option id="fold" value="Fold">Fold</option>
+            </select>
+            <label> Bet </label> <input name="bet_field" type="number" value="0" min="0" max="{{curr_player.tokens}}">
+          <input type="submit"  value="Do Action">
+        </form>  
+      {% else %}
+        <p> Not your TUrn </p>
+      {% endif %}
+      </p>
+
+    <a href="/game" class="button">Go to Lobby</a>
+
+  </body>
+</html>

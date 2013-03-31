@@ -1,0 +1,40 @@
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> MP2 CS498</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ </head>
+  <body>
+    
+    <h1> Action </h1>
+
+      <h3>Your Cards</h3>
+      <p>
+        {% for card in player.cards_visible %}
+          {{ card }}
+        {% else %}
+            <li>No Cards</li>
+        {% endfor %}
+      </p>
+      <h4>Dealers Cards </p>
+      <p>
+        {% for card in game.common_cards_visible %}
+          {{ card }}
+        {% else %}
+            <li>No Cards</li>
+        {% endfor %}
+      </p>
+
+      <h2> You {{value}} </h2>
+
+
+        <a href="/game/{{game.key.id()}}/clear"> Go Back to {{game.name}} </a>
+
+      </p>
+
+
+
+  </body>
+</html>
